@@ -12,10 +12,28 @@
 отрывков) -  название другого файла и тд. по частоте встречания'''
 import re
 
+paradigm_adj = 'ый ий ой ая ое ые ие ого его ой ей ых их ому ему им ым ую юю ими ыми ом ем'
+
 titles_number = {}
 
 user = input('Поиск по слову (сочетанию слов):  ')
 user = user.lower()
+n = user.count(' ')
+if n == 0:
+    word1 = user
+    user_words = [word1]
+elif n == 1:
+    word1, word2 = user.split()
+    user_words = [word1, word2]
+elif n == 2:
+    word1, word2, word3 = user.split()
+    if len(word1) <= 2:
+        word1 = word2
+        word2 = word3
+        user_words = [word1, word2]
+    elif len(word2) <= 2:
+        word2 = word3
+        user_words = [word1, word2]
 
 for i in range(1, 12):
     file = 'text_' + str(i) + '.txt'
@@ -27,12 +45,29 @@ for i in range(1, 12):
         text_title = re.search(regex_title, text, re.M)
         text_title = text_title.group()
         text = text.lower()
-        rex_user = ' ' + user[:-1] + '[а-я]{0,3}' + ' '
-        regex_user = re.compile(rex_user)
-        found_match = re.findall(regex_user, text)
-        found_numbers = len(found_match)
-        titles_number[text_title] = found_numbers
+        if len(user_words) == 1:
+            rex_user = ' ' + word1[:-1] + '[а-я]{0,3}' + ' '
+            regex_user = re.compile(rex_user)
+            found_match = re.findall(regex_user, text)
+            print(found_match)
+            found_numbers = len(found_match)
+            titles_number[text_title] = found_numbers
+        elif len(user_words) == 2:
+            if (word1[-3:] in paradigm_adj) or (word2[-3:] in paradigm_adj):
+                if word1[-3:] in paradigm_adj:
+                    rex_user = word1[:-3] + '[а-я]{0,3}' + '\s(\S)*( )*' + word2[:-1] + '[а-я]{0,3}'
+                elif word2[-3:] in paradigm_adj:
+                    rex_user = word1[:-1] + '[а-я]{0,3}' + '\s(\S)*( )*' + word2[:-3] + '[а-я]{0,3}'
+            elif (word1[-2:] in paradigm_adj) or (word2[-2:] in paradigm_adj):
+                rex_user = word1[:-2] + '[а-я]{0,3}' + '\s(\S)*( )*' + word2[:-2] + '[а-я]{0,3}'
+            else:
+                rex_user = word1[:-1] + '[а-я]{0,3}' + '\s(\S)*( )*' + word2[:-1] + '[а-я]{0,3}'
+            regex_user = re.compile(rex_user)
+            found_match = re.findall(regex_user, text)
+            found_numbers = len(found_match)
+            titles_number[text_title] = found_numbers
 
+gh = '(\W*[А-Яа-яA-Za-zё\d]+\W*){10}'
 list_titles_number = list(titles_number.items())
 list_titles_number.sort(key=lambda i: i[1])
 list_titles_number = list_titles_number[::-1]
