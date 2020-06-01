@@ -61,17 +61,17 @@ for i in range(1, 12):
         elif len(user_words) == 2:
             if (word1[-3:] in paradigm_adj) or (word2[-3:] in paradigm_adj):
                 if word1[-3:] in paradigm_adj:
-                    rex_user = word1[:-3] + '[а-я]{0,3}' + '\s(\S)*\s*' + word2[:-1] + '[а-я]{0,3}'
+                    rex_user = word1[:-3] + '[а-я]{0,3}' + '\s\S*\s*' + word2[:-1] + '[а-я]{0,3}'
                 elif word2[-3:] in paradigm_adj:
-                    rex_user = word1[:-1] + '[а-я]{0,3}' + '\s(\S)*\s*' + word2[:-3] + '[а-я]{0,3}'
+                    rex_user = word1[:-1] + '[а-я]{0,3}' + '\s\S*\s*' + word2[:-3] + '[а-я]{0,3}'
             elif (word1[-2:] in paradigm_adj) or (word2[-2:] in paradigm_adj):
-                rex_user = word1[:-2] + '[а-я]{0,3}' + '\s(\S)*\s*' + word2[:-2] + '[а-я]{0,3}'
+                rex_user = word1[:-2] + '[а-я]{0,3}' + '\s\S*\s*' + word2[:-2] + '[а-я]{0,3}'
             else:
-                rex_user = word1[:-1] + '[а-я]{0,3}' + '\s(\S)*\s*' + word2[:-1] + '[а-я]{0,3}'
+                rex_user = word1[:-1] + '[а-я]{0,3}' + '\s\S*\s*' + word2[:-1] + '[а-я]{0,3}'
             #rex_user = re.compile(rex_user)
             #print(rex_user)
             found_match = re.findall(rex_user, text, re.I)
-            print(found_match)
+            #print(found_match)
             all_found_matches[file] = found_match
             found_numbers = len(found_match)
             titles_number[text_title] = [found_numbers]
@@ -81,8 +81,8 @@ list_titles_number = list(titles_number.items())
 list_titles_number.sort(key=lambda i: i[1])
 list_titles_number = list_titles_number[::-1]
 
-print(list_titles_number)
-print(all_found_matches)
+#print(list_titles_number)
+#print(all_found_matches)
 
 printed_text = ''
 # need_words_1 = []
@@ -134,7 +134,6 @@ for found_text in list_titles_number:
         milky_way = os.path.abspath(opened_file)
         print(milky_way)
         print(found_text[0])
-        print(printed_text)
 
         if printed_text:
             print(printed_text)
