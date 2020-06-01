@@ -61,13 +61,13 @@ for i in range(1, 12):
         elif len(user_words) == 2:
             if (word1[-3:] in paradigm_adj) or (word2[-3:] in paradigm_adj):
                 if word1[-3:] in paradigm_adj:
-                    rex_user = word1[:-3] + '[а-я]{0,3}' + '\s(\S)*( )*' + word2[:-1] + '[а-я]{0,3}'
+                    rex_user = word1[:-3] + '[а-я]{0,3}' + '\s(\S)*\s*' + word2[:-1] + '[а-я]{0,3}'
                 elif word2[-3:] in paradigm_adj:
-                    rex_user = word1[:-1] + '[а-я]{0,3}' + '\s(\S)*( )*' + word2[:-3] + '[а-я]{0,3}'
+                    rex_user = word1[:-1] + '[а-я]{0,3}' + '\s(\S)*\s*' + word2[:-3] + '[а-я]{0,3}'
             elif (word1[-2:] in paradigm_adj) or (word2[-2:] in paradigm_adj):
-                rex_user = word1[:-2] + '[а-я]{0,3}' + '\s(\S)*( )*' + word2[:-2] + '[а-я]{0,3}'
+                rex_user = word1[:-2] + '[а-я]{0,3}' + '\s(\S)*\s*' + word2[:-2] + '[а-я]{0,3}'
             else:
-                rex_user = word1[:-1] + '[а-я]{0,3}' + '\s(\S)*( )*' + word2[:-1] + '[а-я]{0,3}'
+                rex_user = word1[:-1] + '[а-я]{0,3}' + '\s(\S)*\s*' + word2[:-1] + '[а-я]{0,3}'
             #rex_user = re.compile(rex_user)
             #print(rex_user)
             found_match = re.findall(rex_user, text, re.I)
