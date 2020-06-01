@@ -138,7 +138,7 @@ for found_text in list_titles_number:
         if printed_text:
             print(printed_text)
         else:
-            print('Совпадений не найдено :(')
+            print('Совпадений не найдено :(\n')
 
 
 
