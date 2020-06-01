@@ -30,7 +30,6 @@ month = int(time.strftime('%m',time.localtime()))
 year = int(time.strftime('%Y',time.localtime()))
 month31 = [1,3,5,7,8, 10, 12]
 months = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря']
-#хочу из файла
 box_horo = open('horo.txt', encoding='utf-8').read()
 box_horo = box_horo[1:]
 box_horo = box_horo.split('\n')
