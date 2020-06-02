@@ -3,26 +3,26 @@ month1 = ['', 'января', 'февраля', 'марта', 'апреля', '�
 if '.' in data_rog:
     data_rog = data_rog.split('.')
     day = int(data_rog [0])
-    month = int(data_rog [1])
+    month2 = int(data_rog [1])
 elif '/' in data_rog:
     data_rog = data_rog.split('/')
     day = int(data_rog [0])
-    month = int(data_rog [1])
+    month2 = int(data_rog [1])
 elif ' ' in data_rog:
     data_rog = data_rog.split(' ')
     day = int(data_rog [0])
-    month = data_rog [1]
+    month2 = data_rog [1]
     for x in month1:
-        if month==x:
-            month = month1.index (x)
-    month = int(month)
+        if month2==x:
+            month2 = month1.index (x)
+    month2 = int(month2)
 znak = ['','Козерог','Водолей','Рыбы','Овен','Телец','Близнецы','Рак','Лев','Дева','Весы','Скорпион','Стрелец']
-if ((day>=22)and(month>=1)and(month<12)):
-    zodiak =znak[month+1]
-elif ((day<22)and(month == 1)or (month==12)and (day>=22)):
+if ((day>=22)and(month2>=1)and(month2<12)):
+    zodiak =znak[month2+1]
+elif ((day<22)and(month2 == 1)or (month2==12)and (day>=22)):
     zodiak=znak[1]
 else:
-    zodiak =znak[month]
+    zodiak =znak[month2]
 print (zodiak)
 import time, random
 date = int(time.strftime('%d',time.localtime()))
